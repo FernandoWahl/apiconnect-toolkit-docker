@@ -1,5 +1,9 @@
 version: '3'
+networks:
+  backend:
+    driver: bridge
 services:
+### API CONNECT TOOLKIT ################################################
   toolkit:
     build:
       context: ./docker/toolkit
@@ -8,5 +12,19 @@ services:
     volumes: 
       - "./api:/usr/src/api"
     environment:
-        - SKIP_LOGIN=true
-        - PORT=9000
+      - SKIP_LOGIN=true
+      - PORT=9000
+    networks:
+      - backend
+### Portainer ################################################
+  portainer:
+    image: portainer/portainer
+    volumes:
+      - ./docker/portainer:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    extra_hosts:
+      - "dockerhost:10.0.75.1"
+    ports:
+      - 9010:9000
+    networks:
+      - backend

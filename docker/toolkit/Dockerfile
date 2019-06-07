@@ -14,4 +14,4 @@ EXPOSE 9000
 
 WORKDIR /usr/src/api
 
-CMD ["apic", "edit" ]
+CMD [ "apic", "edit", "--accept-license" ]
