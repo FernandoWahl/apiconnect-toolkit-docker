@@ -1,0 +1,12 @@
+version: '3'
+services:
+  toolkit:
+    build:
+      context: ./docker/toolkit
+    ports:
+      - "9000:9000"
+    volumes: 
+      - "./api:/usr/src/api"
+    environment:
+        - SKIP_LOGIN=true
+        - PORT=9000
